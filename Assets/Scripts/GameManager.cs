@@ -4,14 +4,6 @@ using UnityEditor.Rendering;
 using UnityEditorInternal;
 using UnityEngine;
 
-/*
- * TODO
- * - Separate the creation of enemy instance to the Enemy class, rename it to EnemySpawner, and create instance there
- * TOLEARN
- * - Learn github
- * - Scriptable Objects
- * - Don't destory on load
- */  
 public class GameManager : MonoBehaviour
 {
     #region variables
@@ -29,6 +21,8 @@ public class GameManager : MonoBehaviour
     [SerializeField]
     public GroundSpawner groundSpawner;
 
+    [SerializeField]
+    public BattleSystem battleSystem; 
     public enum States { Battle, GameBegin, Transition }
 
     //Consider using dictionary for switching states with enum
@@ -45,15 +39,15 @@ public class GameManager : MonoBehaviour
     {
         if (debugging) 
             Debug.Log("Game starts");
-
-        initializeStates();
+        
         SetGlobalReference();
+        Initialize();
         Subscribe();
 
         toState(gameBeginState);
     }
 
-    private void initializeStates()
+    private void Initialize()
     {
         battleState = new BattleState();
         transitionState = new TransitionState();
@@ -62,6 +56,7 @@ public class GameManager : MonoBehaviour
 
     private void SetGlobalReference()
     {
+        GlobalReference.battleSystem = battleSystem;
         GlobalReference.player = player;
         GlobalReference.enemySpawner = enemySpawner;
         GlobalReference.groundSpawner = groundSpawner;

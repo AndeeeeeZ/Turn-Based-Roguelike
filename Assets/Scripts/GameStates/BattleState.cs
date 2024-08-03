@@ -9,11 +9,15 @@ using UnityEngine.Rendering.VirtualTexturing;
 
 public class BattleState : GameState, IGameState
 {
-    //public event Action MoveSelected;
     public event Action<GameManager.States> BattleStateEnds;
 
     private GameManager.States nextState = GameManager.States.Transition;
     private Enemy enemyInstance; 
+
+    public BattleState()
+    {
+        GlobalReference.battleSystem.BattleEnds += Exit; 
+    }
 
     public new void Enter()
     {
@@ -22,42 +26,18 @@ public class BattleState : GameState, IGameState
 
         GlobalReference.player.Battle(); 
         enemyInstance = GlobalReference.enemySpawner.getEnemyInstance();
+        GlobalReference.battleSystem.Enter();
     } 
 
-    public void StateUpdate()
-    {
-        KeyCode key = HandleInput();
-        if (key != KeyCode.None)
-        {
-            if (debugging)
-                Debug.Log("Input detected, attack");
-            enemyInstance.TakeDamage(GlobalReference.player.Attack(key));
-            GlobalReference.player.TakeDamage(enemyInstance.Attack(key));
-        }
-        if (!enemyInstance.IsAlive())
-        {
-            BattleStateEnds?.Invoke(nextState);
-            Exit();
-        }
-    }
+    public void StateUpdate() { }
 
-    public void Exit() {
-        if (debugging)
-            Debug.Log("Battle state ends");
+    public void Exit()
+    {
         GlobalReference.enemySpawner.Exit();
-    }
-    private KeyCode HandleInput()
-    {
-        if (Input.GetKeyDown(KeyCode.W))
-            return KeyCode.W;
-        if (Input.GetKeyDown(KeyCode.A))
-            return KeyCode.A;
-        if (Input.GetKeyDown(KeyCode.S))
-            return KeyCode.S;
-        if (Input.GetKeyDown(KeyCode.D))
-            return KeyCode.D;
-        return KeyCode.None;
+        BattleStateEnds?.Invoke(nextState);
+
+        if (debugging)
+            Debug.Log("Battle state ends"); 
     }
 
-    
 }

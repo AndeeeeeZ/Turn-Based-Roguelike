@@ -28,14 +28,14 @@ public class Character : MonoBehaviour
         currentHealth = maxHealth;
         health.SetText($"{currentHealth}/{maxHealth}");
     }
-    public virtual float Attack(KeyCode input)
+    public virtual float Attack()
     {
         return attack + extraAttack;
     }
 
     public float TakeDamage(float enemyAttack)
     {
-        float damage = Mathf.Max(0, (enemyAttack - defense));
+        float damage = Mathf.Max(1, (enemyAttack - defense));
         damage = Mathf.Min(damage, currentHealth);
         currentHealth -= damage;
         DisplayHealth();

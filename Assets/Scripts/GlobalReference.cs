@@ -17,5 +17,8 @@ public static class GlobalReference
     public static EnemySpawner enemySpawner;
 
     [SerializeField]
-    public static bool debuggingGameStates; 
+    public static bool debuggingGameStates;
+
+    [SerializeField]
+    public static BattleSystem battleSystem; 
 }
