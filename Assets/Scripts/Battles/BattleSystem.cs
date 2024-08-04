@@ -8,7 +8,7 @@ public class BattleSystem : MonoBehaviour
     [SerializeField]
     bool debugging = false; 
 
-    bool playerTurn = true;
+    bool playerTurn = false;
     Enemy enemyInstance;
 
     public event Action BattleEnds; 
