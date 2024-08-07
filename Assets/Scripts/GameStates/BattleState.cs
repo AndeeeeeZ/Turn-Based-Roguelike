@@ -22,7 +22,7 @@ public class BattleState : GameState, IGameState
     {
         if (debugging)
             Debug.Log("Battle state starts");
-
+        GlobalReference.buttonController.EnableButtons();
         GlobalReference.player.Battle(); 
         enemyInstance = GlobalReference.enemySpawner.getEnemyInstance();
         GlobalReference.battleSystem.Enter();

@@ -4,21 +4,11 @@ using UnityEngine;
 
 public static class GlobalReference
 {
-    [SerializeField]
     public static Player player;
-
-    [SerializeField]
     public static Enemy enemy;
-
-    [SerializeField]
     public static GroundSpawner groundSpawner;
-
-    [SerializeField]
     public static EnemySpawner enemySpawner;
-
-    [SerializeField]
     public static bool debuggingGameStates;
-
-    [SerializeField]
-    public static BattleSystem battleSystem; 
+    public static BattleSystem battleSystem;
+    public static ButtonController buttonController; 
 }

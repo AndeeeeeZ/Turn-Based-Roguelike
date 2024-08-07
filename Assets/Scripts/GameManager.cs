@@ -22,7 +22,11 @@ public class GameManager : MonoBehaviour
     public GroundSpawner groundSpawner;
 
     [SerializeField]
-    public BattleSystem battleSystem; 
+    public BattleSystem battleSystem;
+
+    [SerializeField]
+    public ButtonController buttonController; 
+
     public enum States { Battle, GameBegin, Transition }
 
     //Consider using dictionary for switching states with enum
@@ -61,6 +65,7 @@ public class GameManager : MonoBehaviour
         GlobalReference.enemySpawner = enemySpawner;
         GlobalReference.groundSpawner = groundSpawner;
         GlobalReference.debuggingGameStates = debuggingGameStates;
+        GlobalReference.buttonController = buttonController; 
     }
 
     private void Subscribe()

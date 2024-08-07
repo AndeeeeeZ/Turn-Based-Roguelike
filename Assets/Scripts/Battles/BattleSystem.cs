@@ -46,6 +46,7 @@ public class BattleSystem : MonoBehaviour
     private IEnumerator PlayerAttack(float damage)
     {
         playerTurn = false;
+        GlobalReference.buttonController.DisableButtons();
 
         //add player attack animation & enemy take damage animation
 
@@ -55,7 +56,7 @@ public class BattleSystem : MonoBehaviour
         if (debugging)
             Debug.Log($"Enemy took {damage} damage");
 
-        yield return new WaitForSeconds(1f);
+        yield return new WaitForSeconds(0.4f);
 
         //add enemy attack animation & player damage animation 
 
@@ -71,7 +72,8 @@ public class BattleSystem : MonoBehaviour
         } 
         else
         {
-            playerTurn = true; 
+            playerTurn = true;
+            GlobalReference.buttonController.EnableButtons();
         }
     }
 }

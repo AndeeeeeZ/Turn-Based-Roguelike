@@ -13,6 +13,7 @@ public class TransitionState : GameState, IGameState
 
     public new void Enter()
     {
+        GlobalReference.buttonController.DisableButtons();
         GlobalReference.player.StartTransition();
         GlobalReference.enemySpawner.EnemyInstanceArrived += TransitionEnds;
 
