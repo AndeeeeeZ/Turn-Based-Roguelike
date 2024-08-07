@@ -12,11 +12,6 @@ public class Player : Character
 {
     public new void Enter()
     {
-        maxHealth = 200f;
-        currentHealth = 200f;
-        attack = 10f;
-        defense = 0f;
-        extraAttack = 0f;
         animator.SetBool("IsDead", false);
         StartTransition();
         DisplayHealth();

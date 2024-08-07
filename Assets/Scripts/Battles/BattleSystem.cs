@@ -19,13 +19,13 @@ public class BattleSystem : MonoBehaviour
     public void NormnalAttack()
     {
         if (playerTurn) 
-            StartCoroutine(PlayerAttack(10f)); 
+            StartCoroutine(PlayerAttack(GlobalReference.player.Attack())); 
     }
 
     public void SpecialAttack()
     {
         if (playerTurn)
-            StartCoroutine(PlayerAttack(20f)); 
+            StartCoroutine(PlayerAttack(GlobalReference.player.Attack() * 2f)); 
     }
 
     public void Enter()

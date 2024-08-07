@@ -5,6 +5,11 @@ using UnityEditor;
 using UnityEngine;
 using UnityEngine.Rendering.VirtualTexturing;
 
+
+/*
+ * Scale doesn't always works perfectly, you might need to adjust the y-int when scaling
+ * Scaling also change the scale of the prefab
+ */
 public class SkySpawner : MonoBehaviour
 {
     [SerializeField]
@@ -39,10 +44,10 @@ public class SkySpawner : MonoBehaviour
         closerTrees = new List<BackgroundObject>();
         birds = new List<BackgroundObject>();
 
+        Scale();
+
         width = cloud.GetComponent<SpriteRenderer>().bounds.size.x / 2;
         startPosition = new Vector3(MathLibrary.CameraWidth + width, yInt, 0);
-
-        Scale();
 
         skyParts = new List<BackgroundObject>[] { clouds, furtherTrees, closerTrees, birds };
         BackgroundObjects = new BackgroundObject[] { cloud, furtherTree, closerTree, bird };
@@ -52,7 +57,6 @@ public class SkySpawner : MonoBehaviour
 
     private void Scale()
     {
-        //scale = MathLibrary.CameraWidth / width;
         //Debug.Log($"OrthographicSize: {Camera.main.orthographicSize * Camera.main.aspect}, Cloud Width: {cloud.GetComponent<SpriteRenderer>().bounds.size.x / 2}, Scale: {scale}"); 
         cloud.transform.localScale = new Vector3(scale, scale, scale);
         furtherTree.transform.localScale = new Vector3(scale, scale, scale);
@@ -67,9 +71,9 @@ public class SkySpawner : MonoBehaviour
             for (int j = 0; j < 4; j++)
             {
                 if (i == MathLibrary.CameraWidth)
-                    createNewInstance(new Vector3(i, yInt, 0), j, false);
+                    CreateNewInstance(new Vector3(i, yInt, 0), j, false);
                 else
-                    createNewInstance(new Vector3(i, yInt, 0), j, true);
+                    CreateNewInstance(new Vector3(i, yInt, 0), j, true);
             }  
         }
     }
@@ -83,7 +87,7 @@ public class SkySpawner : MonoBehaviour
                 skyParts[i][j].TransitionUpdate();
                 if (skyParts[i][j].JustFullyEnteredScreen() && !skyParts[i][j].skip)
                 {
-                    createNewInstance(startPosition, i, false) ;
+                    CreateNewInstance(startPosition, i, false) ;
                 }
                 if (skyParts[i][j].OutsideOfScreen())
                 {
@@ -96,11 +100,11 @@ public class SkySpawner : MonoBehaviour
         }
     }
 
-    private void createNewInstance(Vector3 location, int n, bool skip)
+    private void CreateNewInstance(Vector3 location, int n, bool skip)
     {
         if (debugging)
             Debug.Log("New sky parts instance created");
-        BackgroundObject g = Instantiate(BackgroundObjects[n]);
+        BackgroundObject g = Instantiate(BackgroundObjects[n], transform);
         g.skip = skip; 
         g.Spawn(location);
         skyParts[n].Add(g); 

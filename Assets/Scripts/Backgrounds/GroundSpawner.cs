@@ -13,7 +13,7 @@ public class GroundSpawner : MonoBehaviour
     private bool debugging = false;
 
     [SerializeField]
-    private BackgroundObject groundOriginal;
+    private BackgroundObject[] originalObjects;
 
     private List<BackgroundObject> grounds;
     private Vector3 startPosition = new Vector3(20, 0, 0);
@@ -23,7 +23,7 @@ public class GroundSpawner : MonoBehaviour
         if (debugging)
             Debug.Log("GroundSpawner started, created first instance");
         grounds = new List<BackgroundObject>();
-        createNewInstance(Vector3.zero);
+        CreateNewInstance(Vector3.zero);
     }
 
     public void TransitionUpdate()
@@ -33,7 +33,7 @@ public class GroundSpawner : MonoBehaviour
             grounds[i].TransitionUpdate();
             if (grounds[i].JustPassedHalfWay())
             {
-                createNewInstance(startPosition);
+                CreateNewInstance(startPosition);
             }
             if (grounds[i].OutsideOfScreen())
             {
@@ -45,12 +45,18 @@ public class GroundSpawner : MonoBehaviour
         }
     }
 
-    private void createNewInstance(Vector3 location)
+    private void CreateNewInstance(Vector3 location)
     {
         if (debugging)
             Debug.Log("New ground instance created");
-        BackgroundObject g = Instantiate(groundOriginal);
+        BackgroundObject g = Instantiate(SelectRandomTile(), transform);
         g.Spawn(location);
         grounds.Add(g);
+    }
+
+    private BackgroundObject SelectRandomTile()
+    {
+        int randomIndex = UnityEngine.Random.Range(0, originalObjects.Length); 
+        return originalObjects[randomIndex];
     }
 }

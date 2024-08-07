@@ -306,8 +306,8 @@ MonoBehaviour:
   furtherTree: {fileID: 57716681140851154, guid: 5e8b16453bd158d418348b021748b5bc, type: 3}
   closerTree: {fileID: 7685831633792363831, guid: 694359b3363d15a4fb71af6900e7421f, type: 3}
   bird: {fileID: 6005203421508612942, guid: 85505d9df911616449f142175b984486, type: 3}
-  yInt: 4.5
-  scale: 2
+  yInt: 3.5
+  scale: 2.5
 --- !u!114 &149872200 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 5814343774297030312, guid: 1b67cd4ab1f4f774fa9d51d26445aafe, type: 3}
@@ -856,7 +856,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   maxHealth: 100
   currentHealth: 100
-  attack: 5
+  attack: 30
   defense: 0
   extraAttack: 0
   health: {fileID: 975435484}
@@ -1003,7 +1003,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d76b3561163cd0a4080d2cdb64343a68, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  debugging: 1
+  debugging: 0
   PlayEnemyAttackAnimation:
     m_PersistentCalls:
       m_Calls:
@@ -1368,8 +1368,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ec2acf492ffe32344ae82fadf01b6a52, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  debugging: 1
-  debuggingGameStates: 1
+  debugging: 0
+  debuggingGameStates: 0
   player: {fileID: 698690805}
   enemySpawner: {fileID: 1807807899}
   groundSpawner: {fileID: 1921544314}
@@ -1539,7 +1539,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 061c64416b05f554a88165f317f74a73, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  debugging: 1
+  debugging: 0
   orginialEnemy: {fileID: 2390498411679338972, guid: 64a666f9271c1464ca7a22f9a4ddef38, type: 3}
 --- !u!4 &1807807900
 Transform:
@@ -1708,7 +1708,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   debugging: 0
-  groundOriginal: {fileID: 6176871263144126110, guid: 2a83d21e779e37c44b02adb1113274a0, type: 3}
+  originalObjects:
+  - {fileID: 6176871263144126110, guid: b4e466ce0c01852448b3d04295c09e43, type: 3}
+  - {fileID: 6176871263144126110, guid: 116a8285b3c3198449e468f3b86eec58, type: 3}
+  - {fileID: 6176871263144126110, guid: 2a83d21e779e37c44b02adb1113274a0, type: 3}
+  - {fileID: 6176871263144126110, guid: 4e5646b181038314b81b6a4695f672d9, type: 3}
 --- !u!1 &2034163627
 GameObject:
   m_ObjectHideFlags: 0
@@ -1905,9 +1909,9 @@ SceneRoots:
   - {fileID: 619394802}
   - {fileID: 1720104534}
   - {fileID: 1255187660}
+  - {fileID: 2097099329}
   - {fileID: 698690802}
   - {fileID: 1807807900}
   - {fileID: 1921544313}
-  - {fileID: 2097099329}
-  - {fileID: 2034163631}
   - {fileID: 92245325}
+  - {fileID: 2034163631}
