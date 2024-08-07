@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using TMPro;
 using UnityEditor.Rendering;
 using UnityEngine;
+using UnityEngine.Events;
 using UnityEngine.Rendering.VirtualTexturing;
 
 public class Enemy : Character
@@ -38,14 +39,10 @@ public class Enemy : Character
 
     public bool TransitionUpdate()
     {
-        animator.SetBool("IsDead", false);
         transform.Translate(Vector3.left * speed * Time.deltaTime);
         if (transform.position.x <= xTargetPosition)
         {
             transform.position = new Vector2(xTargetPosition, yPosition);
-
-            
-
             return true;
         }
         return false;
@@ -53,10 +50,13 @@ public class Enemy : Character
     }
     public void Exit()
     {
-        animator.SetBool("IsDead", true);
+        animator.SetTrigger("IsDead");
         if (debugging)
             Debug.Log("Enemy died");
     }
 
-
+    public void PlayDamageAnimation()
+    {
+        animator.SetTrigger("Hit"); 
+    }
 }

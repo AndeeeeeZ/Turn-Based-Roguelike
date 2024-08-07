@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System; 
 using UnityEngine;
+using UnityEngine.Events; 
 
 public class BattleSystem : MonoBehaviour
 {
@@ -9,9 +10,11 @@ public class BattleSystem : MonoBehaviour
     bool debugging = false; 
 
     bool playerTurn = false;
-    Enemy enemyInstance;
 
-    public event Action BattleEnds; 
+    public event Action BattleEnds;
+    public event Action EnemyTakeDamage;
+
+    public UnityEvent PlayEnemyAttackAnimation; 
 
     public void NormnalAttack()
     {
@@ -47,6 +50,7 @@ public class BattleSystem : MonoBehaviour
         //add player attack animation & enemy take damage animation
 
         GlobalReference.enemySpawner.getEnemyInstance().TakeDamage(damage);
+        EnemyTakeDamage?.Invoke();
 
         if (debugging)
             Debug.Log($"Enemy took {damage} damage");
@@ -56,6 +60,7 @@ public class BattleSystem : MonoBehaviour
         //add enemy attack animation & player damage animation 
 
         GlobalReference.player.TakeDamage(GlobalReference.enemySpawner.getEnemyInstance().Attack());
+        PlayEnemyAttackAnimation?.Invoke();
 
         if (debugging)
             Debug.Log("Player took damage");

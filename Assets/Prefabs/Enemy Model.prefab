@@ -18,7 +18,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &416556899707354148
 Transform:
   m_ObjectHideFlags: 0
@@ -131,7 +131,6 @@ MonoBehaviour:
   debugging: 1
   speed: 2
   yPosition: 1.5
-  deathWaitTime: 1
 --- !u!1001 &4662347543419258802
 PrefabInstance:
   m_ObjectHideFlags: 0

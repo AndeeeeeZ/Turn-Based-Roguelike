@@ -19,6 +19,7 @@ public class EnemySpawner : MonoBehaviour
     public void Enter ()
     {
         SpawnEnemy();
+        GlobalReference.battleSystem.EnemyTakeDamage += EnemyTakeDamage;
     }
     public void SpawnEnemy()
     {
@@ -44,6 +45,11 @@ public class EnemySpawner : MonoBehaviour
                     Debug.Log("Enemy has arrived target location");
             }
         }
+    }
+
+    public void EnemyTakeDamage()
+    {
+        enemyInstance.PlayDamageAnimation();
     }
 
     public void Exit()
