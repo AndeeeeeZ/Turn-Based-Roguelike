@@ -14,6 +14,7 @@ public class GameBeginState : GameState, IGameState
         GlobalReference.player.Enter();
         GlobalReference.groundSpawner.Enter();
         GlobalReference.enemySpawner.Enter();
+        GlobalReference.skySpawner.Enter();
         Exit();
     }
 

@@ -13,16 +13,16 @@ public class GroundSpawner : MonoBehaviour
     private bool debugging = false;
 
     [SerializeField]
-    private Ground groundOriginal;
+    private BackgroundObject groundOriginal;
 
-    private List<Ground> grounds;
+    private List<BackgroundObject> grounds;
     private Vector3 startPosition = new Vector3(20, 0, 0);
 
     public void Enter()
     {
         if (debugging)
             Debug.Log("GroundSpawner started, created first instance");
-        grounds = new List<Ground>();
+        grounds = new List<BackgroundObject>();
         createNewInstance(Vector3.zero);
     }
 
@@ -49,7 +49,7 @@ public class GroundSpawner : MonoBehaviour
     {
         if (debugging)
             Debug.Log("New ground instance created");
-        Ground g = Instantiate(groundOriginal);
+        BackgroundObject g = Instantiate(groundOriginal);
         g.Spawn(location);
         grounds.Add(g);
     }

@@ -5,7 +5,7 @@ using UnityEngine.Device;
 using UnityEngine.Tilemaps;
 using UnityEngine.UIElements;
 
-public class Ground : MonoBehaviour
+public class BackgroundObject : MonoBehaviour
 {
     [SerializeField]
     private bool debugging = false;
@@ -16,7 +16,11 @@ public class Ground : MonoBehaviour
         cameraHalfWidth = 10f,
         groundHalfWidth = 10f;
 
+    // Check if the current ground object is already half way through
+    // This variable is necessary for the JustPassedHalfWay function
     private bool halfWayThrough = false;
+    private bool fullyEnterScreen = false;
+    public bool skip = false; 
     public void TransitionUpdate()
     {
         transform.Translate(Vector3.left * speed * Time.deltaTime);
@@ -25,7 +29,7 @@ public class Ground : MonoBehaviour
     public void Spawn(Vector3 location)
     {
         if (debugging)
-            Debug.Log("New ground spawned");
+            Debug.Log($"New {this.gameObject.name} spawned");
         gameObject.SetActive(true);
         transform.position = location;
         halfWayThrough = false;
@@ -34,7 +38,7 @@ public class Ground : MonoBehaviour
     {
         bool outside = transform.position.x <= -(cameraHalfWidth + groundHalfWidth + 1);
         if (debugging && outside)
-            Debug.Log("Ground currently outsideOfScreen");
+            Debug.Log($"{this.gameObject.name} currently outsideOfScreen");
         return outside;
     }
 
@@ -44,16 +48,27 @@ public class Ground : MonoBehaviour
         {
             halfWayThrough = true;
             if (debugging)
-                Debug.Log("Ground halfway through");
+                Debug.Log($"{this.gameObject.name} halfway through");
             return true;
         }
         return false;
     }
 
+    public bool JustFullyEnteredScreen()
+    {
+        //If the current object is not fully inside the screen yet & the right side just entered the screen
+        if (!fullyEnterScreen && 
+            (transform.position.x + this.GetComponent<SpriteRenderer>().bounds.size.x / 2) <= MathLibrary.CameraWidth)
+        {
+            fullyEnterScreen = true;
+            return true; 
+        }
+        return false; 
+    }   
     public void Exit()
     {
         if (debugging)
-            Debug.Log("Removed ground outside of screen");
+            Debug.Log($"Removed {this.gameObject.name} outside of screen");
         UnityEngine.Object.Destroy(gameObject);
     }
 

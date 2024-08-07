@@ -22,6 +22,9 @@ public class GameManager : MonoBehaviour
     public GroundSpawner groundSpawner;
 
     [SerializeField]
+    public SkySpawner skySpawner;
+
+    [SerializeField]
     public BattleSystem battleSystem;
 
     [SerializeField]
@@ -64,6 +67,7 @@ public class GameManager : MonoBehaviour
         GlobalReference.player = player;
         GlobalReference.enemySpawner = enemySpawner;
         GlobalReference.groundSpawner = groundSpawner;
+        GlobalReference.skySpawner = skySpawner;
         GlobalReference.debuggingGameStates = debuggingGameStates;
         GlobalReference.buttonController = buttonController; 
     }

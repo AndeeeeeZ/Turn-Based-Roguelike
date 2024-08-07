@@ -25,6 +25,7 @@ public class TransitionState : GameState, IGameState
     {
         GlobalReference.groundSpawner.TransitionUpdate();
         GlobalReference.enemySpawner.TransitionUpdate();
+        GlobalReference.skySpawner.TransitionUpdate();
     }
 
     public void Exit() 
