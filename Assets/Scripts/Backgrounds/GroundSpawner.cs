@@ -18,6 +18,8 @@ public class GroundSpawner : MonoBehaviour
     private List<BackgroundObject> grounds;
     private Vector3 startPosition = new Vector3(20, 0, 0);
 
+    private int lastMap; 
+
     public void Enter()
     {
         if (debugging)
@@ -57,6 +59,13 @@ public class GroundSpawner : MonoBehaviour
     private BackgroundObject SelectRandomTile()
     {
         int randomIndex = UnityEngine.Random.Range(0, originalObjects.Length); 
+
+        while (randomIndex == lastMap && originalObjects.Length > 1)
+        {
+            randomIndex = UnityEngine.Random.Range(0, originalObjects.Length);
+        }
+        
+        lastMap = randomIndex;
         return originalObjects[randomIndex];
     }
 }
