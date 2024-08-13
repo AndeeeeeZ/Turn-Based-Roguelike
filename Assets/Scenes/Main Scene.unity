@@ -815,7 +815,7 @@ Transform:
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: -5.5, y: 1.5, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
+  m_ConstrainProportionsScale: 1
   m_Children:
   - {fileID: 616025665}
   - {fileID: 1835515457}
@@ -1729,7 +1729,7 @@ GameObject:
   - component: {fileID: 2034163628}
   - component: {fileID: 2034163632}
   m_Layer: 5
-  m_Name: Buttons
+  m_Name: Attack Buttons
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

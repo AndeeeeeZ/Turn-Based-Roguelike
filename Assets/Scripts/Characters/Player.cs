@@ -10,6 +10,7 @@ using UnityEngine;
 
 public class Player : Character
 {
+
     public new void Enter()
     {
         animator.SetBool("IsDead", false);
@@ -25,6 +26,11 @@ public class Player : Character
     public void Battle()
     {
         animator.SetBool("Run", false);
+    }
+
+    public void Dead()
+    {
+        animator.SetBool("IsDead", true); 
     }
 
 }

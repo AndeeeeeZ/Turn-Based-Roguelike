@@ -13,6 +13,7 @@ public class BattleSystem : MonoBehaviour
 
     public event Action BattleEnds;
     public event Action EnemyTakeDamage;
+    public event Action<GameManager.States> PlayerDie; 
 
     public UnityEvent PlayEnemyAttackAnimation; 
 
@@ -43,6 +44,13 @@ public class BattleSystem : MonoBehaviour
         playerTurn = false; 
     }
 
+    public void GameOver()
+    {
+        if (debugging)
+            Debug.Log("Player died");
+        PlayerDie?.Invoke(GameManager.States.GameOver);
+        playerTurn = false; 
+    }
     private IEnumerator PlayerAttack(float damage)
     {
         playerTurn = false;
@@ -58,22 +66,31 @@ public class BattleSystem : MonoBehaviour
 
         yield return new WaitForSeconds(0.4f);
 
-        //add enemy attack animation & player damage animation 
-
-        GlobalReference.player.TakeDamage(GlobalReference.enemySpawner.getEnemyInstance().Attack());
-        PlayEnemyAttackAnimation?.Invoke();
-
-        if (debugging)
-            Debug.Log("Player took damage");
-
         if (!GlobalReference.enemySpawner.getEnemyInstance().IsAlive())
         {
             Exit();
-        } 
+        }
         else
         {
-            playerTurn = true;
-            GlobalReference.buttonController.EnableButtons();
+            GlobalReference.player.TakeDamage(GlobalReference.enemySpawner.getEnemyInstance().Attack());
+            PlayEnemyAttackAnimation?.Invoke();
+
+            if (debugging)
+                Debug.Log("Player took damage");
+
+            if (!GlobalReference.enemySpawner.getEnemyInstance().IsAlive())
+            {
+                Exit();
+            }
+            else if (!GlobalReference.player.IsAlive())
+            {
+
+            }
+            else
+            {
+                playerTurn = true;
+                GlobalReference.buttonController.EnableButtons();
+            }
         }
     }
 }

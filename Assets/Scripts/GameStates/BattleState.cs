@@ -11,7 +11,6 @@ public class BattleState : GameState, IGameState
     public event Action<GameManager.States> BattleStateEnds;
 
     private GameManager.States nextState = GameManager.States.Transition;
-    private Enemy enemyInstance; 
 
     public BattleState()
     {
@@ -24,7 +23,6 @@ public class BattleState : GameState, IGameState
             Debug.Log("Battle state starts");
         GlobalReference.buttonController.EnableButtons();
         GlobalReference.player.Battle(); 
-        enemyInstance = GlobalReference.enemySpawner.getEnemyInstance();
         GlobalReference.battleSystem.Enter();
     } 
 

@@ -30,12 +30,13 @@ public class GameManager : MonoBehaviour
     [SerializeField]
     public ButtonController buttonController; 
 
-    public enum States { Battle, GameBegin, Transition }
+    public enum States { Battle, GameBegin, Transition, GameOver }
 
     //Consider using dictionary for switching states with enum
     BattleState battleState;
     TransitionState transitionState;
     GameBeginState gameBeginState;
+    GameOverState gameOverState;
     
     private IGameState currentState;
 
@@ -51,7 +52,7 @@ public class GameManager : MonoBehaviour
         Initialize();
         Subscribe();
 
-        toState(gameBeginState);
+        ToState(gameBeginState);
     }
 
     private void Initialize()
@@ -59,6 +60,7 @@ public class GameManager : MonoBehaviour
         battleState = new BattleState();
         transitionState = new TransitionState();
         gameBeginState = new GameBeginState();
+        gameOverState = new GameOverState();
     }
 
     private void SetGlobalReference()
@@ -77,12 +79,13 @@ public class GameManager : MonoBehaviour
         transitionState.TransitionStateEnds += switchStateTo;
         gameBeginState.GameBeginStateEnds += switchStateTo;
         battleState.BattleStateEnds += switchStateTo;
+        battleSystem.PlayerDie += switchStateTo; 
     }
 
     #endregion
 
     #region Methods
-    private void toState(IGameState state)
+    private void ToState(IGameState state)
     {
         if (currentState == state)
             return; 
@@ -94,7 +97,7 @@ public class GameManager : MonoBehaviour
     //Take in enum States
     public void switchStateTo(States state)
     {
-        toState(convertToState(state));
+        ToState(convertToState(state));
     }
 
     private IGameState convertToState(States state)
@@ -107,6 +110,8 @@ public class GameManager : MonoBehaviour
                 return transitionState; 
             case States.GameBegin:
                 return gameBeginState;
+            case States.GameOver:
+                return gameOverState; 
             default:
                 Debug.Log("State not found");
                 return transitionState; 

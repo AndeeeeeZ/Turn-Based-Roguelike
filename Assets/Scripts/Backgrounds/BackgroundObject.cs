@@ -12,9 +12,9 @@ public class BackgroundObject : MonoBehaviour
 
     [SerializeField]
     float
-        speed = 2f,
-        cameraHalfWidth = 10f,
-        groundHalfWidth = 10f;
+        speed = 2f;
+
+    float tilemapWidth = 10f; 
 
     // Check if the current ground object is already half way through
     // This variable is necessary for the JustPassedHalfWay function
@@ -36,7 +36,7 @@ public class BackgroundObject : MonoBehaviour
     }
     public bool OutsideOfScreen()
     {
-        bool outside = transform.position.x <= -(cameraHalfWidth + groundHalfWidth + 1);
+        bool outside = transform.position.x <= -(MathLibrary.CameraWidth + tilemapWidth + 1);
         if (debugging && outside)
             Debug.Log($"{this.gameObject.name} currently outsideOfScreen");
         return outside;
